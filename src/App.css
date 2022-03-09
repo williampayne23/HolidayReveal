@@ -36,3 +36,11 @@
     transform: rotate(360deg);
   }
 }
+
+.modal-dialog{
+  overflow-y: initial !important
+}
+.modal-body{
+  height: 60vh;
+  overflow-y: auto;
+}

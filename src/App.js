@@ -3,7 +3,9 @@ import RevealList from './Components/RevealList';
 
 function App() {
   return (
-    <RevealList/>
+    <div>
+      <RevealList/>
+    </div>
   );
 }
 
