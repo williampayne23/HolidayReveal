@@ -67,15 +67,16 @@ function RevealList() {
 
   return (
     <div>
+      <PopupPage page={currentPage} show={currentPage !== ""} onHide={() => setCurrentPage("")} />
       <Navbar bg="dark" variant="dark">
         <Container>
           <Navbar.Text>You have <FlipOnChange>{numCredits()}</FlipOnChange> reveals available</Navbar.Text>
           <Navbar.Text><Countdown targetDate={nextCredit()}/></Navbar.Text>
         </Container>
       </Navbar>
-      <PopupPage page={currentPage} show={currentPage !== ""} onHide={() => setCurrentPage("")} />
       <Container fluid>
-        <Row xs={1} md={2} className="g-4">
+        <Row><br/></Row>
+        <Row xs={1} md={2} lg={3} className="g-4">
           {list ? list.map(item => <Item item={item} callback={clickCallback} />) : ""}
         </Row>
       </Container>
@@ -86,8 +87,8 @@ function RevealList() {
 function Item({ item, callback }) {
   return (
     <Col>
-      <ReactCardFlip isFlipped={item.visible} flipDirection="vertical">
-        <Card>
+      <ReactCardFlip isFlipped={item.visible} flipDirection="vertical" containerStyle={{height:"100%"}}>
+        <Card style={{height:"100%"}}>
           <Card.Body>
             <Card.Title>{item.name}</Card.Title>
             <Card.Text>
@@ -97,7 +98,7 @@ function Item({ item, callback }) {
           </Card.Body>
         </Card>
 
-        <Card>
+        <Card style={{height:"100%"}}>
           <Card.Body>
             <Card.Title>{item.name}</Card.Title>
             <Card.Text>
