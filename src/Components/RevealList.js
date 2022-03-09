@@ -58,11 +58,11 @@ function RevealList() {
     newList[index].visible = true;
     updateList(newList)
 
-    // fetch("https://hooks.zapier.com/hooks/catch/5708500/bifr05e?id=" + item.id)
-    // .then(() => {
+    fetch("https://hooks.zapier.com/hooks/catch/5708500/bifr05e?id=" + item.id)
+    .then(() => {
 
-    // })
-    // .catch((err) => console.error(err));
+    })
+    .catch((err) => console.error(err));
   }
 
   return (
