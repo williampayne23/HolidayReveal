@@ -1,10 +1,13 @@
 import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
 import { useEffect, useState } from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container, Row, Col, Navbar } from 'react-bootstrap';
 import ReactCardFlip from 'react-card-flip';
 import FlipOnChange from './FlipOnChange';
 import PopupPage from './PopupPage';
+import Countdown from './Countdown';
+
+const creditTimings = [new Date(2022, 2, 1), new Date(2022, 2, 2), new Date(2022, 2, 3), new Date(2022, 2, 4)]
 
 function RevealList() {
   const [list, updateList] = useState([]);
@@ -22,11 +25,14 @@ function RevealList() {
   function numCredits() {
     if (list.length === 0)
       return "?"
-    const dates = [new Date(2022, 2, 1), new Date(2022, 2, 2), new Date(2022, 2, 3), new Date(2022, 2, 4)];
-    let creditsGiven = dates.findIndex((date) => date - Date.now() > 0)
-    creditsGiven = creditsGiven < 0 ? dates.length : creditsGiven;
+    let creditsGiven = creditTimings.findIndex((date) => date - Date.now() > 0)
+    creditsGiven = creditsGiven < 0 ? creditTimings.length : creditsGiven;
     const creditsUsed = list.filter(i => i.visible).length
     return creditsGiven - creditsUsed;
+  }
+
+  function nextCredit(){
+    return creditTimings.find((date) => date - Date.now() > 0)
   }
 
   useEffect(() => {
@@ -61,17 +67,18 @@ function RevealList() {
 
   return (
     <div>
-    <PopupPage page={currentPage} show={currentPage !== ""} onHide={() => setCurrentPage("")}/>
-    <Container fluid>
-      <Row>
-        <Col>
-            You have <Button><FlipOnChange data={numCredits()}/></Button> reveals available
-        </Col>
-      </Row>
-      <Row xs={1} md={2} className="g-4">
-        {list ? list.map(item => <Item item={item} callback={clickCallback} />) : ""}
-      </Row>
-    </Container>
+      <Navbar bg="dark" variant="dark">
+        <Container>
+          <Navbar.Text>You have <FlipOnChange>{numCredits()}</FlipOnChange> reveals available</Navbar.Text>
+          <Navbar.Text><Countdown targetDate={nextCredit()}/></Navbar.Text>
+        </Container>
+      </Navbar>
+      <PopupPage page={currentPage} show={currentPage !== ""} onHide={() => setCurrentPage("")} />
+      <Container fluid>
+        <Row xs={1} md={2} className="g-4">
+          {list ? list.map(item => <Item item={item} callback={clickCallback} />) : ""}
+        </Row>
+      </Container>
     </div>
   );
 }
