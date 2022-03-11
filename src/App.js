@@ -1,12 +1,17 @@
 import './App.css';
 import RevealList from './Components/RevealList';
+import { QueryClient, QueryClientProvider } from 'react-query'
+import {ReactQueryDevtools} from 'react-query/devtools'
+
+const queryClient = new QueryClient()
 
 function App() {
   return (
-    <div>
-      <RevealList/>
-    </div>
+    <QueryClientProvider client={queryClient}>
+      <RevealList />
+    {/* <ReactQueryDevtools initialIsOpen/> */}
+    </QueryClientProvider>
   );
 }
 
-export default App;
+export default App

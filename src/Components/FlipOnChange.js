@@ -7,7 +7,6 @@ function FlipOnChange({children}){
     const [flipState, updateFlipState] = useState(false);
 
     useEffect(() => {
-        //Runs on change in data?
         updateFlipState(f => !f)
         const timer = setTimeout(() => {
             updateCurrentData(children)

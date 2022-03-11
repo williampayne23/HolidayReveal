@@ -38,7 +38,7 @@ function Countdown({targetDate}) {
 
 
     return <>
-        Time until next reveal: <FlipOnChange>{pad(timeLeft.days, 2)}</FlipOnChange>:
+        <FlipOnChange>{pad(timeLeft.days, 2)}</FlipOnChange>:
         <FlipOnChange>{pad(timeLeft.hours, 2)}</FlipOnChange>:
         <FlipOnChange>{pad(timeLeft.minutes, 2)}</FlipOnChange>:
         <FlipOnChange>{pad(timeLeft.seconds, 2)}</FlipOnChange>

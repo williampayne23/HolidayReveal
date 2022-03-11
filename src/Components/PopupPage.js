@@ -1,24 +1,15 @@
-import { useEffect, useState } from 'react';
-import { Modal, Button, Spinner } from 'react-bootstrap'
+import { Modal, Button } from 'react-bootstrap'
 import "react-notion/src/styles.css";
 import "prismjs/themes/prism-tomorrow.css";
 
+import Loading from './Loading'
+
 import { NotionRenderer } from "react-notion";
+import useCardDetail from '../Hooks/useCardDetail';
 
 function PopupPage(props) {
-    const [data, setData] = useState({});
+    const {isLoading, data} = useCardDetail(props.page?.id)
 
-    useEffect(() => {
-        if(props.page === "")
-            return;
-        fetch("https://notion-api.splitbee.io/v1/page/" + props.page?.id)
-        .then(res => res.json())
-        .then(setData);
-    }, [props.page])
-
-    const loading = props.page.id !== "" && JSON.stringify(data) === JSON.stringify({})
-
-    console.log(props.page)
     return (
         <Modal
             {...props}
@@ -28,40 +19,19 @@ function PopupPage(props) {
         >
             <Modal.Header closeButton>
                 <Modal.Title id="contained-modal-title-vcenter">
-                    {loading? "": props.page?.name}
+                    {isLoading || data == null? "": props.page?.name}
                 </Modal.Title>
             </Modal.Header>
-            {loading? <LoadingBody/> : <Body data={data}/>}
+            <Modal.Body>
+                {isLoading || data == null? <Loading/> : <NotionRenderer blockMap={data}/>}
+            </Modal.Body>
             <Modal.Footer>
                 <Button onClick={(e) => {
-                    setData({})
                     props.onHide(e);
                     }}>Close</Button>
             </Modal.Footer>
         </Modal>
     )
 }
-
-function Body({data}){
-    console.log(data)
-    return (
-    <Modal.Body>
-        <NotionRenderer blockMap={data}/>
-    </Modal.Body>
-    )
-}
-
-function LoadingBody(){
-    return <Modal.Body>
-        <div style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-            }}>
-             <Spinner padding={100} animation="border"/>
-        </div>
-        </Modal.Body>
-}
-
 
 export default PopupPage;
