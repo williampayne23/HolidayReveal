@@ -1,11 +1,14 @@
 import useCardFlip from "../Hooks/useCardFlip";
-import { Card, Col, Button, Tooltip, OverlayTrigger } from "react-bootstrap";
+import { Card, Col, Button, Tooltip, Overlay } from "react-bootstrap";
 import ReactCardFlip from "react-card-flip";
 import useDates from "../Hooks/useDates";
+import { useRef, useState } from "react";
 
 function RevealCard({ item, setFocus }) {
   const { enoughCredits } = useDates()
   const flipCard = useCardFlip()
+  const [showOverlay, setShowOverlay] = useState(false)
+  const overlayTarget = useRef(null)
 
   function onClick() {
     if (item.visible) {
@@ -14,6 +17,8 @@ function RevealCard({ item, setFocus }) {
     }
 
     if (!enoughCredits()) {
+      setShowOverlay(true);
+      setTimeout(() => setShowOverlay(false), 2000);
       return
     }
 
@@ -31,14 +36,15 @@ function RevealCard({ item, setFocus }) {
             </Card.Text>
           </Card.Body>
           <Card.Footer>
-            <OverlayTrigger
+          <span ref={overlayTarget} onClick={onClick} className="d-inline-block">
+            <Button disabled={!enoughCredits()} variant="primary">{"Find the clue!"}</Button>
+          </span>
+            <Overlay
               placement="top"
-              delay={{ show: 250, hide: 400 }}
-              overlay={<Tooltip id="button-tooltip">You have to wait for the next reveal</Tooltip>}>
-              <span className="d-inline-block">
-                <Button disabled onClick={onClick} variant="primary">{"Find the clue!"}</Button>
-              </span>
-            </OverlayTrigger>
+              target={overlayTarget.current}
+              show={showOverlay}>
+              <Tooltip visible={item.visible} id="button-tooltip">You have to wait for the next reveal</Tooltip>
+            </Overlay>
           </Card.Footer>
         </Card>
 

@@ -33,7 +33,11 @@ function useDates(){
         return numCredits() > 0
     }
 
-    return {numCredits, nextCredit, enoughCredits}
+    function allCreditsUsed(){
+        return nextCredit() === undefined && numCredits() === 0;
+    }
+
+    return {numCredits, nextCredit, enoughCredits, allCreditsUsed}
 }
 
 export default useDates
