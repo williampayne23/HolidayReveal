@@ -10,7 +10,7 @@ const creditTimings = [
     new Date(2022, 3, 1, 17),
     new Date(2022, 2, 2, 12),
     new Date(2022, 2, 2, 17),
-    new Date(2022, 2, 3, 17),
+    new Date(2022, 2, 3, 5),
 ];
 
 function useDates(){
