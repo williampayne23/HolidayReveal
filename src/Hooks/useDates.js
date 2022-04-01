@@ -7,8 +7,8 @@ const creditTimings = [
     new Date(2022, 2, 29, 17),
     new Date(2022, 2, 30, 17),
     new Date(2022, 2, 31, 17),
+    new Date(2022, 3, 1, 12),
     new Date(2022, 3, 1, 17),
-    new Date(2022, 3, 2, 12),
     new Date(2022, 3, 2, 17),
     new Date(2022, 3, 3, 5),
 ];
