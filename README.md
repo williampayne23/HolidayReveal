@@ -2,6 +2,10 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+
+This is a simple react frontend for a holiday reveal site for my girlfriend. It pulls clues about the holiday from Notion and allows the user to flip clues at regular hard coded intervals to get more info about the place we're going
+
+
 ## Available Scripts
 
 In the project directory, you can run:
