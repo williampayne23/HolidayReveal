@@ -4,22 +4,29 @@ import { QueryClient, QueryClientProvider } from 'react-query'
 import { Container, Form, Button } from 'react-bootstrap';
 import { CookiesProvider } from "react-cookie";
 import useLogin from './Hooks/useLogin';
+import Countdown from './Components/Countdown';
+
+import FlipClockCountdown from '@leenguyen/react-flip-clock-countdown';
+import '@leenguyen/react-flip-clock-countdown/dist/index.css';
 
 const queryClient = new QueryClient()
 
 function App() {
-  const [loggedIn, setLoggedIn] = useLogin();
-  console.log(loggedIn)
-  if (!loggedIn)
-    return <Login setCodeEntered={setLoggedIn} />;
 
-  return (
-    <CookiesProvider>
-      <QueryClientProvider client={queryClient}>
-        <RevealList />
-      </QueryClientProvider>
-    </CookiesProvider>
-  );
+  return <div style={{display:"flex", "justifyContent": "center", height: "100vh"}}>
+        <FlipClockCountdown to={new Date(2022, 6, 25, 11, 30)} />
+    </div>
+  // const [loggedIn, setLoggedIn] = useLogin();
+  // if (!loggedIn)
+  //   return <Login setCodeEntered={setLoggedIn} />;
+
+  // return (
+  //   <CookiesProvider>
+  //     <QueryClientProvider client={queryClient}>
+  //       <RevealList />
+  //     </QueryClientProvider>
+  //   </CookiesProvider>
+  // );
 }
 
 
