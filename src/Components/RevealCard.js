@@ -37,13 +37,13 @@ function RevealCard({ item, setFocus }) {
           </Card.Body>
           <Card.Footer>
           <span ref={overlayTarget} onClick={onClick} className="d-inline-block">
-            <Button disabled={!enoughCredits()} variant="primary">{"Find the clue!"}</Button>
+            <Button disabled={!enoughCredits()} variant="primary">{item.button}</Button>
           </span>
             <Overlay
               placement="top"
               target={overlayTarget.current}
               show={showOverlay}>
-              <Tooltip visible={item.visible} id="button-tooltip">You have to wait for the next reveal</Tooltip>
+              <Tooltip visible={item.visible} id="button-tooltip">{item.unavailable_tooltip}</Tooltip>
             </Overlay>
           </Card.Footer>
         </Card>
@@ -56,7 +56,7 @@ function RevealCard({ item, setFocus }) {
             </Card.Text>
           </Card.Body>
           <Card.Footer>
-            <Button onClick={onClick} variant="primary">{"Click for more"}</Button>
+            <Button onClick={onClick} variant="primary">{"Click to read"}</Button>
           </Card.Footer>
         </Card>
       </ReactCardFlip>

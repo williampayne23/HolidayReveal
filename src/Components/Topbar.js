@@ -8,8 +8,8 @@ function Topbar(){
   const {numCredits, nextCredit} = useDates();
    return  <Navbar bg="dark" variant="dark">
        <Container fluid>
-      <Navbar.Text>You have <FlipOnChange>{numCredits()}</FlipOnChange> reveals available</Navbar.Text>
-      <Navbar.Text>Time until next reveal: <Countdown targetDate={nextCredit()} /></Navbar.Text>
+      <Navbar.Text>You have <FlipOnChange>{numCredits()}</FlipOnChange> door opens</Navbar.Text>
+      <Navbar.Text>Time until next open: <Countdown targetDate={nextCredit()} /></Navbar.Text>
       </Container>
   </Navbar>
 }

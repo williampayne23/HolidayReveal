@@ -36,13 +36,13 @@ function MainCard({item, setFocus}){
             </Card.Body>
             <Card.Footer className="text-center">
           <span ref={overlayTarget} onClick={onClick} className="d-inline-block">
-            <Button disabled={!allCreditsUsed()} variant="primary">{"Find out where we're going"}</Button>
+            <Button disabled={!allCreditsUsed()} variant="primary">{item.button}</Button>
           </span>
             <Overlay
               placement="top"
               target={overlayTarget.current}
               show={showOverlay}>
-              <Tooltip visible={item.visible} id="button-tooltip">You have to flip all the clues first!</Tooltip>
+              <Tooltip visible={item.visible} id="button-tooltip">{item.unavailable_tooltip}</Tooltip>
             </Overlay>
           </Card.Footer>
           </Card>
@@ -55,7 +55,7 @@ function MainCard({item, setFocus}){
               </Card.Text>
             </Card.Body>
             <Card.Footer className="text-center">
-              <Button onClick={onClick} variant="primary">{"Click for more"}</Button>
+              <Button onClick={onClick} variant="primary">{"Click to read"}</Button>
             </Card.Footer>
           </Card>
         </ReactCardFlip>)
